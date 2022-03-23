@@ -1,8 +1,5 @@
 *.pem
 *.srl
-ca/client*
-ca/server*
-ca/ca*
 node_modules
 .env
 !.env-sample
