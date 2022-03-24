@@ -29,7 +29,9 @@ openssl req -new -key server-key.pem -out server-csr.pem \
 
 echo "Signing the server signing request:"
 
-openssl x509 -req -days 365 -in server-csr.pem -CA ca-crt.pem -CAkey ca-key.pem -CAcreateserial -out server-crt.pem -passin pass:password \
+openssl x509 -req -days 365 -in server-csr.pem \
+  -CA ca-crt.pem -CAkey ca-key.pem -CAcreateserial \
+  -out server-crt.pem -passin pass:password \
   -extfile <(printf "subjectAltName=DNS:localhost,DNS:127.0.0.1,IP:127.0.0.1") \
   || {
     echo "Generate the server signing: FAILED"
@@ -43,8 +45,18 @@ openssl genrsa -out client-key.pem 4096
 echo "Generate the client signing request:"
 
 openssl req -new -key client-key.pem -out client-csr.pem \
-  -subj "/C=DK/ST=Denmark/L=Copenhagen/O=Trashers Test Client/OU=Test Client/CN=client.js/emailAddress=client-user@example.com"
+  -subj "/C=DK/ST=Denmark/L=Copenhagen/O=Trashers Test Client/OU=Test Client/CN=client.js/emailAddress=client-user@example.com" \
+  || {
+    echo "Generate the client signing request: FAILED"
+    exit 1
+  }
 
 echo "Signing the client signing request:"
 
-openssl x509 -req -days 365 -in client-csr.pem -CA ca-crt.pem -CAkey ca-key.pem -CAcreateserial -out client-crt.pem -passin pass:password
+openssl x509 -req -days 365 -in client-csr.pem \
+  -CA ca-crt.pem -CAkey ca-key.pem -CAcreateserial \
+  -out client-crt.pem -passin pass:password \
+  || {
+    echo "Signing the client signing request: FAILED"
+    exit 1
+  }
