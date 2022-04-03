@@ -1,6 +1,6 @@
 # A Nested CA authority
 
-Given a Authority structore like:
+Given a Authority structure like:
 ```
 Roo-CA
 ├── Intermediate-1-CA
