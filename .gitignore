@@ -2,4 +2,4 @@
 *.srl
 node_modules
 .env
-!.env-sample
+!.env*sample
