@@ -1,17 +1,20 @@
-const https = require('https')
-const fs = require('fs')
-const path = require('path')
+import { createServer } from 'https'
+import { readFileSync } from 'fs'
+import path, { resolve } from 'path'
+import { fileURLToPath } from 'url'
 
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 const options = {
-  key: fs.readFileSync(path.resolve(__dirname, '../ca/server-key.pem')),
-  cert: fs.readFileSync(path.resolve(__dirname, '../ca/server-crt.pem')),
-  ca: fs.readFileSync(path.resolve(__dirname, '../ca/ca-crt.pem')),
+  key: readFileSync(resolve(__dirname, '../ca/server-key.pem')),
+  cert: readFileSync(resolve(__dirname, '../ca/server-crt.pem')),
+  ca: readFileSync(resolve(__dirname, '../ca/ca-crt.pem')),
 }
 
 const host = '127.0.0.1'
 const port = 8443
 
-https.createServer(options, (req, res) => {
+createServer(options, (req, res) => {
   console.log('request')
   res.setHeader('Content-Type', 'text/html; charset=utf-8')
   res.setHeader('Cache-Control', 'no-cache')
