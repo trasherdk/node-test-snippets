@@ -1,0 +1,24 @@
+{
+  "name": "test-snippets",
+  "version": "0.0.1",
+  "description": "Minimal code snippets to test stuff",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/trasherdk/node-test-snippets.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/trasherdk/node-test-snippets/issues"
+  },
+  "homepage": "https://github.com/trasherdk/node-test-snippets#readme",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "node-fetch": "^3.2.3"
+  }
+}
