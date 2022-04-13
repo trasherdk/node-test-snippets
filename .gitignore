@@ -1,4 +1,7 @@
 *.pem
+*.crt
+*.key
+*.csr
 *.srl
 node_modules
 .env
