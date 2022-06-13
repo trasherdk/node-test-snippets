@@ -8,13 +8,20 @@ This guide shows how to set up a bidirectional client/server authentication for 
 
 Run the script `./ca/gen-certs.sh` to generate valid client/server certificates.
 
+`Node.js documentation`
+[tls.createServer()](https://nodejs.org/api/tls.html#tlscreateserveroptions-secureconnectionlistener)
+[tls.connect()](https://nodejs.org/api/tls.html#tlsconnectoptions-callback)
 
 ## Server code:
 
 ```javascript
-const tls = require('tls')
-const fs = require('fs')
-const path = require('path')
+import { createServer } from 'tls'
+import { readFileSync } from 'fs'
+import path, { resolve } from 'path'
+import { fileURLToPath } from 'url'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
 const options = {
   key: fs.readFileSync(path.resolve(__dirname, '../ca/server-key.pem')),
@@ -49,9 +56,13 @@ server.listen(port, host, () => {
 ## Client code:
 
 ```js
-const tls = require('tls')
-const fs = require('fs')
-const path = require('path')
+import { connect } from 'tls'
+import { readFileSync } from 'fs'
+import path, { resolve } from 'path'
+import { fileURLToPath } from 'url'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
 const host = process.env.SERVER_HOST || '127.0.0.1'
 const port = process.env.SERVER_PORT || 8000
