@@ -1,16 +1,20 @@
-const tls = require('tls')
-const fs = require('fs')
-const path = require('path')
+import { createServer } from 'tls'
+import { readFileSync } from 'fs'
+import path, { resolve } from 'path'
+import { fileURLToPath } from 'url'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
 const options = {
-  key: fs.readFileSync(path.resolve(__dirname, '../ca/server-key.pem')),
-  cert: fs.readFileSync(path.resolve(__dirname, '../ca/server-crt.pem')),
-  ca: fs.readFileSync(path.resolve(__dirname, '../ca/ca-crt.pem')),
+  key: readFileSync(resolve(__dirname, '../ca/server-key.pem')),
+  cert: readFileSync(resolve(__dirname, '../ca/server-crt.pem')),
+  ca: readFileSync(resolve(__dirname, '../ca/ca-crt.pem')),
   requestCert: true,
   rejectUnauthorized: true
 }
 
-const server = tls.createServer(options, (socket) => {
+const server = createServer(options, (socket) => {
   console.log('server connected',
     socket.authorized ? 'authorized' : 'unauthorized')
 

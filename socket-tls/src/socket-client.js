@@ -1,21 +1,25 @@
-const tls = require('tls')
-const fs = require('fs')
-const path = require('path')
+import { connect } from 'tls'
+import { readFileSync } from 'fs'
+import path, { resolve } from 'path'
+import { fileURLToPath } from 'url'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
 const host = process.env.SERVER_HOST || '127.0.0.1'
 const port = process.env.SERVER_PORT || 8000
 
 const options = {
-  ca: fs.readFileSync(path.resolve(__dirname, '../ca/ca-crt.pem')),
-  key: fs.readFileSync(path.resolve(__dirname, '../ca/client-key.pem')),
-  cert: fs.readFileSync(path.resolve(__dirname, '../ca/client-crt.pem')),
+  ca: readFileSync(resolve(__dirname, '../ca/ca-crt.pem')),
+  key: readFileSync(resolve(__dirname, '../ca/client-key.pem')),
+  cert: readFileSync(resolve(__dirname, '../ca/client-crt.pem')),
   host: host,
   port: port,
   rejectUnauthorized: true,
   requestCert: true
 }
 
-const socket = tls.connect(options, () => {
+const socket = connect(options, () => {
   console.log('client connected',
     socket.authorized ? 'authorized' : 'unauthorized')
   process.stdin.pipe(socket)
