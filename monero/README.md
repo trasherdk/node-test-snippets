@@ -5,7 +5,7 @@
 
 ### ZMQ Interface
 
-**Q:** [How do I properly subscribe to ZMQ events?](https://monero.stackexchange.com/q/13107/7574) :arrow_upper_right:
+**Q:** [How do I properly subscribe to ZMQ events?](https://monero.stackexchange.com/q/13107/7574) :arrow_heading_up:
 
 ```js
 const zmq = require("zeromq")
