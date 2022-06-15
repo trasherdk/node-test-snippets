@@ -1,10 +1,13 @@
 import { createServer } from 'tls'
 import { readFileSync } from 'fs'
+import dotenv from 'dotenv'
 import path, { resolve } from 'path'
 import { fileURLToPath } from 'url'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
+
+dotenv.config()
 
 const options = {
   key: readFileSync(resolve(__dirname, '../ca/server-key.pem')),

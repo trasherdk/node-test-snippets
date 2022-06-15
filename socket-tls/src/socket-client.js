@@ -1,10 +1,13 @@
 import { connect } from 'tls'
 import { readFileSync } from 'fs'
+import dotenv from 'dotenv'
 import path, { resolve } from 'path'
 import { fileURLToPath } from 'url'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
+
+dotenv.config()
 
 const host = process.env.SERVER_HOST || '127.0.0.1'
 const port = process.env.SERVER_PORT || 8000
