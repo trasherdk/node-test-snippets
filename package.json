@@ -25,6 +25,7 @@
   "dependencies": {
     "base64-stream": "^1.0.0",
     "dotenv": "^16.0.0",
+    "jose": "^4.8.1",
     "simple-node-logger": "^21.8.12"
   }
 }
