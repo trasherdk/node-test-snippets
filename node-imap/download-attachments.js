@@ -1,4 +1,4 @@
-import 'dotenv/config'
+import dotenv from 'dotenv'
 import fs from 'fs'
 import { Base64Decode } from 'base64-stream'
 import Imap from 'imap'
@@ -10,6 +10,8 @@ import { fileURLToPath } from 'url'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
+
+dotenv.config()
 
 const markAsRead = (process.env.IMAP_READ === 'true')
 
