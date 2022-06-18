@@ -1,6 +1,8 @@
-import 'dotenv/config'
+import dotenv from 'dotenv'
 import Imap from 'imap'
 import util from 'util'
+
+dotenv.config()
 
 const imap = new Imap({
   user: process.env.IMAP_USER,
