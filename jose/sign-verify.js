@@ -16,7 +16,7 @@ async function errorDemo (algo) {
   }
 
   // Create token, sign with private key
-  let payload = {
+  const payload = {
     user: 'JohnDoe',
     groups: ['Group A', 'Group B']
   }
@@ -34,11 +34,11 @@ async function errorDemo (algo) {
     console.error(`Error signing token for algo ${algo}`);
   }
 
-  //Verify the token using the previously exported public key -- This would normally be fetched via HTTP
+  // Verify the token using the previously exported public key -- This would normally be fetched via HTTP
   try {
-    var importedPubkey = await importSPKI(pubkey);
-    var extractedPayload = await jwtVerify(signedToken, importedPubkey); // compactVerify => jwtVerify
-    console.log(`Token is valid for algo ${algo} : ` + extractedPayload.payload.toString());
+    const importedPubkey = await importSPKI(pubkey);
+    const extractedPayload = await jwtVerify(signedToken, importedPubkey); // compactVerify => jwtVerify
+    console.log(`Token is valid for algo ${algo} : ` + JSON.stringify(extractedPayload.payload));
   } catch (error) {
     console.error(`Token is invalid for algo ${algo} -- error: ${error}`);
   }
