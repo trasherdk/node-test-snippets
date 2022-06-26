@@ -1,8 +1,10 @@
+import { delay } from './utils.js'
 
 const nameList = ['Alpha', 'Bravo', 'Charlie', 'Delta']
 
 const hello = async (name) => {
   const time = Math.random() * 10
+  await delay(time)
   const promise = new Promise((resolve, reject) => {
     resolve(`Hello ${name}`)
   })
@@ -22,5 +24,13 @@ const runEach = () => {
   })
 }
 
+const runMap = () => {
+  nameList.map(async (name) => {
+    console.log('runMap:', await hello(name))
+  })
+}
+
+
 runSeq()
-runEach()
+// runEach()
+runMap()
