@@ -20,15 +20,15 @@
   },
   "devDependencies": {
     "imap": "^0.8.19",
-    "node-fetch": "^3.2.3"
+    "node-fetch": "^3.2.6"
   },
   "dependencies": {
     "base64-stream": "^1.0.0",
-    "ccxt": "^1.88.45",
+    "ccxt": "^1.89.8",
     "ccxws": "^0.47.0",
-    "dotenv": "^16.0.0",
+    "dotenv": "^16.0.1",
     "jose": "^4.8.1",
-    "jsrsasign": "^10.5.24",
+    "jsrsasign": "^10.5.25",
     "jsrsasign-util": "^1.0.5",
     "simple-node-logger": "^21.8.12"
   }
