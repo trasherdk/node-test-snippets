@@ -1,4 +1,4 @@
-import { delay } from './utils.js'
+import { delay } from '../../lib/utils.js'
 
 const accounts = new Map()
 const ledger = []
