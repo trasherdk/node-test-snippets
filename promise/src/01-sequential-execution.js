@@ -1,9 +1,9 @@
-import { delay } from './utils.js'
+import { delay } from '../../lib/utils.js'
 
 const nameList = ['Alpha', 'Bravo', 'Charlie', 'Delta']
 
 const hello = async (name) => {
-  const time = Math.random() * 10
+  const time = Math.random() * 2
   await delay(time)
   const promise = new Promise((resolve, reject) => {
     resolve(`Hello ${name}`)
@@ -32,5 +32,5 @@ const runMap = () => {
 
 
 runSeq()
-// runEach()
+runEach()
 runMap()
