@@ -6,6 +6,11 @@ cd ${BASE}
 
 TEMP="${BASE}/temp"
 
+usage() {
+  echo "${LGREEN}Usage: ${WHITE}$(basename $0) ${YELLOW}certificate-key.pem payload.txt${RESTORE}"
+  exit 1
+}
+
 if [ ! -d ${TEMP} ]; then
   if ! mkdir ${TEMP};then
     echo "* Make TEMP directory failed: ${TEMP}"
@@ -15,28 +20,26 @@ fi
 
 if test $# -ne 2
 then
-  echo "Usage: $(basename $0) private.key payload.txt"
-  exit 1
+  echo "Missing key file and/or payload."
+  usage
 fi
 
-if ! test -f $1
+if ! test -f "$1"
 then
   echo "Missing key file"
-  echo "Usage: $(basename $0) private-key.pem payload.txt"
-  exit 1
+  usage
 fi
 
-if ! test -f $2
+if ! test -f "$2"
 then
   echo "Missing payload file"
-  echo "Usage: $(basename $0) private-key.pem payload.txt"
-  exit 1
+  usage
 fi
 
 # generate PSS signature file. Hash of payload.
 if ! openssl dgst -sha256 -binary -out ${TEMP}/$2.bin $2
 then
-  echo "Generate PSS signature file failed."
+  echo "Generate sha256 hash file failed."
   exit 1
 fi
 
@@ -50,4 +53,3 @@ then
   echo "Generate PSS signature file failed."
   exit 1
 fi
-
