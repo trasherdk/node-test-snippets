@@ -40,7 +40,24 @@ try {
 
 console.log(sResult);
 
-console.log(jsrsasign.KJUR.jws.JWS.verifyJWT(sResult, Public, {
+console.log('verifyJWT:', jsrsasign.KJUR.jws.JWS.verifyJWT(sResult, Public, {
   alg: ['ES256'],
   verifyAt: jsrsasign.KJUR.jws.IntDate.get('now')
 }));
+
+try {
+  var headerObj = jsrsasign.KJUR.jws.JWS.readSafeJSONString(jsrsasign.b64utoutf8(sResult.split(".")[0]));
+} catch (error) {
+  console.log('error:', error)
+  exit
+}
+
+try {
+  var payloadObj = jsrsasign.KJUR.jws.JWS.readSafeJSONString(jsrsasign.b64utoutf8(sResult.split(".")[1]));
+} catch (error) {
+  console.log('payloadObj:', error)
+  exit
+}
+
+console.log('Header:', headerObj)
+console.log('Payload:', payloadObj)
