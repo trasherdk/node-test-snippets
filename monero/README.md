@@ -31,7 +31,12 @@ run()
 
 ZeroMQ uses different types of sockets for request/response messages and publisher/subscriber messages.
 
-The one you are trying to use, enabled by default on port 18082, is of type RESP, and can only be used for request/response. To use pub/sub, you need a separate socket of type PUB. This isn't enabled by default, but can be easily enabled by passing the --zmq-pub argument to monerod. For example, monerod --zmq-pub ipc://var/run/monerod.pub to use a local socket, or monerod --zmq-pub tcp://localhost:18085 to use a TCP socket.
+The one you are trying to use, enabled by default on port 18082, is of type RESP, and can only be used
+for request/response. To use pub/sub, you need a separate socket of type PUB. This isn't enabled by
+default, but can be easily enabled by passing the --zmq-pub argument to monerod.
+
+For example, monerod --zmq-pub ipc://var/run/monerod.pub to use a local socket,
+or monerod --zmq-pub tcp://localhost:18085 to use a TCP socket.
 
 Then simply use the same URI in your JavaScript client, and it should work.
 ```
