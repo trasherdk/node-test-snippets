@@ -12,16 +12,16 @@ const Payload = readFileSync(resolve(__dirname, '../message.txt'))
 const payload = Payload.toString('utf8')
 
 // sign
-const sig = new jsrsasign.KJUR.crypto.Signature({ "alg": "SHA256withRSAandMGF1" });
-const prikey = jsrsasign.KEYUTIL.getKey(Private);
+const sig = new jsrsasign.KJUR.crypto.Signature({ alg: 'SHA256withRSAandMGF1' })
+const prikey = jsrsasign.KEYUTIL.getKey(Private)
 
-sig.init(prikey);
-sig.updateString(payload);
-let sign = sig.sign();
+sig.init(prikey)
+sig.updateString(payload)
+const sign = sig.sign()
 
 // verify text
-const sig2 = new jsrsasign.KJUR.crypto.Signature({ "alg": "SHA256withRSAandMGF1" });
-const pubkey = jsrsasign.KEYUTIL.getKey(Public);
-sig2.init(pubkey);
-sig2.updateString(payload);
-console.log('Verify text:', sig2.verify(sign));// true
+const sig2 = new jsrsasign.KJUR.crypto.Signature({ alg: 'SHA256withRSAandMGF1' })
+const pubkey = jsrsasign.KEYUTIL.getKey(Public)
+sig2.init(pubkey)
+sig2.updateString(payload)
+console.log('Verify text:', sig2.verify(sign))// true

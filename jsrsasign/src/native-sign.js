@@ -20,7 +20,7 @@ const signature = crypto.createSign('SHA256')
   .end()
   .sign({
     key: Private,
-    padding: crypto.constants.RSA_PKCS1_PSS_PADDING,
+    padding: crypto.constants.RSA_PKCS1_PSS_PADDING
     // saltLength: -2
   })
 
@@ -30,7 +30,7 @@ const checker = crypto.createVerify('SHA256')
 
 let valid = checker.verify({
   key: Public,
-  padding: crypto.constants.RSA_PKCS1_PSS_PADDING,
+  padding: crypto.constants.RSA_PKCS1_PSS_PADDING
   // saltLength: -2
 }, signature)
 console.log('verify by native', valid)
@@ -42,7 +42,7 @@ const verifier = new rs.KJUR.crypto.Signature({
 })
 
 verifier.init(Public)
-verifier.updateHex(payload)
+verifier.updateString(payload)
 
 try {
   valid = verifier.verify(signature)
@@ -51,11 +51,11 @@ try {
   console.log('verifier.verify', error.message)
 }
 try {
-  const sig2 = new rs.KJUR.crypto.Signature({ alg: "SHA256withRSA" });
-  const pubkey = rs.KEYUTIL.getKey(Public);
-  sig2.init(pubkey);
-  sig2.updateString(payload);
-  console.log(sig2.verify(signature));// true
+  const sig2 = new rs.KJUR.crypto.Signature({ alg: 'SHA256withRSA' })
+  const pubkey = rs.KEYUTIL.getKey(Public)
+  sig2.init(pubkey)
+  sig2.updateString(payload)
+  console.log('pubkey:', sig2.verify(signature))
 } catch (error) {
   console.log('sig2.verify', error.message)
 }
