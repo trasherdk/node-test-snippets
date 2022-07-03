@@ -1,50 +1,61 @@
 import { readFileSync } from 'fs'
-import crypto from 'crypto'
+import crypto from 'node:crypto'
 import rs from 'jsrsasign'
-import rsu from 'jsrsasign-util'
 import path, { resolve } from 'path'
 import { fileURLToPath } from 'url'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
-const Private = rsu.readFileUTF8(resolve(__dirname, '../ca/server-key.pem'))
-const Public = rsu.readFileUTF8(resolve(__dirname, '../ca/server-crt.pem'))
+const Private = readFileSync(resolve(__dirname, '../ca/server-key.pem')).toString('utf8')
+const Public = readFileSync(resolve(__dirname, '../ca/server-crt.pem')).toString('utf8')
 const Payload = readFileSync(resolve(__dirname, '../message.txt'))
 
-// const payload = rs.hextorstr(Payload)
 const payload = Payload.toString('utf8')
-console.log(' payload', payload)
+console.log('* payload:', Payload.toString('utf8'), payload)
 
 console.log('sign by native')
-const native = crypto.createSign('SHA256')
+const signature = crypto.createSign('SHA256')
   .update(payload)
+  .end()
   .sign({
     key: Private,
-    constding: crypto.constants.RSA_PKCS1_PSS_PADDING
+    padding: crypto.constants.RSA_PKCS1_PSS_PADDING,
+    // saltLength: -2
   })
 
-console.log('verify by native')
-console.log('Verify native: ', crypto.createVerify('SHA256')
+const checker = crypto.createVerify('SHA256')
   .update(payload)
-  .verify({
-    key: Public,
-    padding: crypto.constants.RSA_PKCS1_PSS_PADDING
-  }, native)
-)
+  .end()
+
+let valid = checker.verify({
+  key: Public,
+  padding: crypto.constants.RSA_PKCS1_PSS_PADDING,
+  // saltLength: -2
+}, signature)
+console.log('verify by native', valid)
 
 console.log('verify by jsrsasign')
-const sigobj = new rs.KJUR.crypto.Signature({
+const verifier = new rs.KJUR.crypto.Signature({
   alg: 'SHA256withRSAandMGF1',
   psssaltlen: -2
 })
 
-sigobj.init(Public)
-sigobj.updateString(payload)
-let valid
+verifier.init(Public)
+verifier.updateHex(payload)
+
 try {
-  valid = sigobj.verify(native.toString('hex'))
-  console.log('pure js: ', valid)
+  valid = verifier.verify(signature)
+  console.log('KJUR js: ', valid)
 } catch (error) {
-  console.log('sigobj.verify', error)
+  console.log('verifier.verify', error.message)
+}
+try {
+  const sig2 = new rs.KJUR.crypto.Signature({ alg: "SHA256withRSA" });
+  const pubkey = rs.KEYUTIL.getKey(Public);
+  sig2.init(pubkey);
+  sig2.updateString(payload);
+  console.log(sig2.verify(signature));// true
+} catch (error) {
+  console.log('sig2.verify', error.message)
 }
