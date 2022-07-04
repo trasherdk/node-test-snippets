@@ -51,7 +51,7 @@ let payloadObj
 try {
   headerObj = jsrsasign.KJUR.jws.JWS.readSafeJSONString(jsrsasign.b64utoutf8(sResult.split('.')[0]))
 } catch (error) {
-  console.log('error:', error)
+  console.log('headerObj:', error)
   process.exit()
 }
 
