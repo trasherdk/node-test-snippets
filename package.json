@@ -32,6 +32,6 @@
     "jsrsasign": "^10.5.25",
     "jsrsasign-util": "^1.0.5",
     "simple-node-logger": "^21.8.12",
-    "zeromq": "^6.0.0-beta.5"
+    "zeromq": "^6.0.0-beta.6"
   }
 }
