@@ -1,15 +1,15 @@
 {
   "name": "zeromq-examples",
   "license": "MIT",
-  "dependencies": {
-    "zeromq": "file:.."
-  },
-  "devDependencies": {
-    "ts-node": ">= 0"
-  },
   "scripts": {
     "majordomo": "ts-node majordomo",
     "queue": "ts-node queue",
     "threaded-worker": "ts-node threaded-worker"
+  },
+  "dependencies": {
+    "zeromq": "^6.0.0-beta.6"
+  },
+  "devDependencies": {
+    "ts-node": ">= 0"
   }
 }
