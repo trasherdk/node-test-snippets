@@ -22,16 +22,17 @@ const onConnect = (event) => {
 
 const onHandshake = (event) => {
   console.log('Handshake from %s', event.address)
+  console.log('Handshake Event:', event)
 
-  // sock.subscribe('json-minimal-txpool_add')
-  sock.subscribe('json')
+  sock.subscribe('json-minimal-txpool_add')
+  // sock.subscribe('json')
 }
 
 // Port should be your monerod --zmq-pub port
 console.log('Connecting to %s:%s', MONERO_HOST, MONERO_ZMQ_PORT)
 
 sock.connect(`tcp://${MONERO_HOST}:${MONERO_ZMQ_PORT}`)
-sock.subscribe('json-minimal-txpool_add')
+// sock.subscribe('json-minimal-txpool_add')
 
 for await (Event of sock.events) {
   switch (Event.type) {
