@@ -32,6 +32,7 @@
     "jsrsasign": "^10.5.26",
     "jsrsasign-util": "^1.0.5",
     "simple-node-logger": "^21.8.12",
+    "threads": "^1.7.0",
     "zeromq": "^5.2.8"
   }
 }
