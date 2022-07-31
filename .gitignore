@@ -4,6 +4,6 @@
 *.csr
 *.srl
 node_modules
-.env
+.env.*
 !.env*sample
 temp
