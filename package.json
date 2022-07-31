@@ -31,6 +31,8 @@
     "jose": "^4.8.3",
     "jsrsasign": "^10.5.26",
     "jsrsasign-util": "^1.0.5",
+    "piscina": "^3.2.0",
+    "progress": "^2.0.3",
     "simple-node-logger": "^21.8.12",
     "threads": "^1.7.0",
     "zeromq": "^5.2.8"
