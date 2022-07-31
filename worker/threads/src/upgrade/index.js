@@ -1,19 +1,8 @@
 import { spawn, Thread, Worker } from "threads"
-import path, { resolve } from 'path'
-import { fileURLToPath } from 'url'
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
+const worker = await spawn(new Worker("./upgrade"))
+const result = await worker.download('file.ext')
 
-import { func1 } from "./upgrade.js"
+console.log('Result:', result)
 
-const download = async () => {
-  try {
-    const worker = await spawn(new Worker("./upgrade"))
-    await func1()
-  } catch (error) {
-    console.error('main:', error)
-  }
-}
-
-download()
+await Thread.terminate(worker)
