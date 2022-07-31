@@ -1,34 +1,44 @@
 import * as zmq from 'zeromq';
-import { config } from 'dotenv'
+import dotenv from 'dotenv'
+import path, { resolve } from 'path'
+import { fileURLToPath } from 'url'
 
-config()
-const { MONERO_HOST, MONERO_ZMQ_PORT } = process.env
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
-const sock = zmq.socket('sub');
+// config()
 
-sock.on("bind", event => {
+const ENV_PATH = resolve(__dirname, `../../.env.${process.env.MONERO_NET}`)
+console.info('Loading network specific config from %s', ENV_PATH)
+
+dotenv.config({ path: ENV_PATH })
+const { MONERO_HOST, MONERO_ZMQ_PORT, MONERO_NET } = process.env
+
+const subscriber = zmq.socket('sub');
+
+subscriber.on("bind", event => {
   console.log(`Socket bound to ${event.address}`)
   // ...
 })
 
-sock.on('message', (message) => {
+subscriber.on('message', (message) => {
   let messageClean = Buffer.from(message).toString()
   messageClean = messageClean.slice(messageClean.indexOf(':') + 1)
   console.log(messageClean)
   // console.log(message2.json-minimal-txpool_add);
 })
 
-sock.on('connect', (event) => {
+subscriber.on('connect', (event) => {
   console.log('Subscriber connected to %s:%s', MONERO_HOST, MONERO_ZMQ_PORT)
 
 })
 
 // Port should be your monerod --zmq-pub port
-console.log('Subscriber connecting to %s:%s', MONERO_HOST, MONERO_ZMQ_PORT)
+console.log('Subscriber connecting to %s:%s on %s', MONERO_HOST, MONERO_ZMQ_PORT, MONERO_NET)
 
-sock.connect(`tcp://${MONERO_HOST}:${MONERO_ZMQ_PORT}`);
+subscriber.connect(`tcp://${MONERO_HOST}:${MONERO_ZMQ_PORT}`);
 
-sock.subscribe('json-minimal-txpool_add');
+subscriber.subscribe('json-minimal-txpool_add');
 
 /*
 export interface JsonMinimalTxpoolAdd {
@@ -38,7 +48,7 @@ export interface JsonMinimalTxpoolAdd {
   fee: number
 }
 
-sock.on('message', (message) => {
+subscriber.on('message', (message) => {
   const messageClean = Buffer.from(message).toString() as unknown as JsonMinimalTxpoolAdd[];
   console.log(messageClean)
   // console.log(message2.json-minimal-txpool_add);
