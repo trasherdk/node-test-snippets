@@ -1,4 +1,3 @@
-// workers/auth.js
 // import sha256 from "js-sha256"
 import crypto from "crypto"
 import { expose } from "threads/worker"
