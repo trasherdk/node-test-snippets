@@ -1,12 +1,12 @@
 import { Worker } from 'node:worker_threads'
 
-const worker = new Worker(new URL('./worker.ts', import.meta.url), {
+const worker = new Worker(new URL('./worker.js', import.meta.url), {
   workerData: [2, 2],
   execArgv: ['--loader', 'ts-node/esm'],
 })
 
-const result = async () => {
-  return await new Promise < number > ((resolve, reject) => {
+const calc = async () => {
+  const result = await new Promise<number>((resolve, reject) => {
     worker.on('message', resolve)
     worker.on('error', reject)
     worker.on('exit', (code) => {
@@ -15,6 +15,7 @@ const result = async () => {
       }
     })
   })
+  return await result
 }
 
-console.log(result)
+console.log(calc)

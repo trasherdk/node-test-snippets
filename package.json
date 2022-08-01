@@ -15,12 +15,16 @@
   "homepage": "https://github.com/trasherdk/node-test-snippets#readme",
   "main": "index.js",
   "type": "module",
+  "module": "nodenext",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
+    "@types/node": "^18.6.3",
     "node-fetch": "^3.2.9",
-    "tsm": "^2.2.2"
+    "ts-node": "^10.9.1",
+    "tsm": "^2.2.2",
+    "typescript": "^4.7.4"
   },
   "dependencies": {
     "axios": "^0.27.2",
