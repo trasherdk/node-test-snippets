@@ -21,6 +21,7 @@
   },
   "devDependencies": {
     "@types/node": "^18.6.4",
+    "@types/zeromq": "^5.2.1",
     "node-fetch": "^3.2.10",
     "ts-node": "^10.9.1",
     "tsm": "^2.2.2",
