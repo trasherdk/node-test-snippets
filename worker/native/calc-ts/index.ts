@@ -15,7 +15,8 @@ const calc = async () => {
       }
     })
   })
-  return await result
+  return result
 }
 
-console.log(calc)
+const result = await calc()
+console.log('Result:', result)
