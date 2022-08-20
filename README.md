@@ -8,8 +8,12 @@ To launch ts code from command line, this seems to be the way:
 ```sh
 node --experimental-specifier-resolution=node --loader ts-node/esm path/to/example/
 ```
+or even
+```sh
+node --loader ts-node/esm path/to/example/
+```
 
-`tsconfij.json` need the `module` and `target` set to something recent.
+`tsconfig.json` need the `module` and `target` set to something recent.
 ```json
 {
   "compilerOptions": {
