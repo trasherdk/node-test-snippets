@@ -1,0 +1,9 @@
+Table "kraken_history"."assets_available" {
+  "asset" VARCHAR(255) [not null]
+  "class" VARCHAR(255) [not null]
+  "altname" VARCHAR(255) [default: NULL]
+  "decimals" INT(10) [not null]
+  "display_decimals" INT(10) [not null]
+  "active" TINYINT(1) [not null, default: 0]
+  "created_at" TIMESTAMP [not null, default: `CURRENT_TIMESTAMP`]
+}
