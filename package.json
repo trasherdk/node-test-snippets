@@ -20,22 +20,22 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
-    "@types/node": "^18.6.4",
+    "@types/node": "^18.7.14",
     "@types/zeromq": "^5.2.1",
     "node-fetch": "^3.2.10",
     "ts-node": "^10.9.1",
     "tsm": "^2.2.2",
-    "typescript": "^4.7.4"
+    "typescript": "^4.8.2"
   },
   "dependencies": {
     "axios": "^0.27.2",
     "base64-stream": "^1.0.0",
-    "ccxt": "^1.91.78",
+    "ccxt": "^1.93.1",
     "ccxws": "^0.47.0",
-    "dotenv": "^16.0.1",
+    "dotenv": "^16.0.2",
     "imap": "^0.8.19",
-    "jose": "^4.8.3",
-    "jsrsasign": "^10.5.26",
+    "jose": "^4.9.2",
+    "jsrsasign": "^10.5.27",
     "jsrsasign-util": "^1.0.5",
     "piscina": "^3.2.0",
     "progress": "^2.0.3",
