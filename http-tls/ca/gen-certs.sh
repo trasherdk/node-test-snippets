@@ -1,7 +1,7 @@
 #!/bin/bash
 
 cd $(dirname $(realpath $0))
-if [ ! -f $(basema,e $0) ]; then
+if [ ! -f $(basemae $0) ]; then
   exit 1
 fi
 
