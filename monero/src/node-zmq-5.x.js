@@ -8,7 +8,7 @@ const __dirname = path.dirname(__filename)
 
 // config()
 
-const ENV_PATH = resolve(__dirname, `../../.env.${process.env.MONERO_NET}`)
+const ENV_PATH = resolve(__dirname, `../../.env.${process.env.MONERO_NET || 'stagenet'}`)
 console.info('Loading network specific config from %s', ENV_PATH)
 
 dotenv.config({ path: ENV_PATH })
