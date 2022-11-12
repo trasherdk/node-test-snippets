@@ -3,7 +3,21 @@
 
 ## Monero Daemon
 
+
 ### ZMQ Interface
+
+
+Launch **Monero ZMQ** monitor
+
+```sh
+MONERO_NET=[mainnet|testnet|stagenet] node monero/src/node-zmq-5.x.js
+```
+
+If started without the `MONERO_NET` environment variable,
+`node monero/src/node-zmq-5.x.js` it will default to `stagenet`
+
+
+
 
 **Q:** [How do I properly subscribe to ZMQ events?](https://monero.stackexchange.com/q/13107/7574) :arrow_heading_up:
 
