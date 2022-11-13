@@ -12,7 +12,7 @@ const ENV_PATH = resolve(__dirname, `../../.env.${process.env.MONERO_NET || 'sta
 console.info('Loading network specific config from %s', ENV_PATH)
 
 dotenv.config({ path: ENV_PATH })
-const { MONERO_HOST, MONERO_ZMQ_PORT, MONERO_NET } = process.env
+const { MONERO_HOST, MONERO_ZMQ_SUB_PORT, MONERO_NET } = process.env
 
 const subscriber = zmq.socket('sub')
 
@@ -29,13 +29,13 @@ subscriber.on('message', (message) => {
 })
 
 subscriber.on('connect', (event) => {
-  console.log('Subscriber connected to %s:%s', MONERO_HOST, MONERO_ZMQ_PORT)
+  console.log('Subscriber connected to %s:%s', MONERO_HOST, MONERO_ZMQ_SUB_PORT)
 })
 
 // Port should be your monerod --zmq-pub port
-console.log('Subscriber connecting to %s:%s on %s', MONERO_HOST, MONERO_ZMQ_PORT, MONERO_NET)
+console.log('Subscriber connecting to %s:%s on %s', MONERO_HOST, MONERO_ZMQ_SUB_PORT, MONERO_NET)
 
-subscriber.connect(`tcp://${MONERO_HOST}:${MONERO_ZMQ_PORT}`)
+subscriber.connect(`tcp://${MONERO_HOST}:${MONERO_ZMQ_SUB_PORT}`)
 
 subscriber.subscribe('json-minimal-txpool_add')
 
