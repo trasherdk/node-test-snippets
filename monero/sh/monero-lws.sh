@@ -17,7 +17,7 @@ CMD="monero-lws-daemon \
   --db-path /var/lib/monero/data/stagenet/monero-lws \
   --daemon 'tcp://${MONERO_HOST}:${MONERO_ZMQ_RPC_PORT}' \
   --sub 'tcp://${MONERO_HOST}:${MONERO_ZMQ_SUB_PORT}' \
-  --log-level 2"
+  --log-level 4"
 
 echo "$CMD"
 echo -n "${WHITE}* Launch ${YELLOW}monero-lws-stagenet: ${RESTORE}"
