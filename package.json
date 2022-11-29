@@ -38,6 +38,7 @@
     "jose": "^4.10.0",
     "jsrsasign": "^10.5.27",
     "jsrsasign-util": "^1.0.5",
+    "mysql2": "^2.3.3",
     "node-fetch": "^3.2.10",
     "node-jose": "^2.1.1",
     "node-jsencrypt": "^1.0.0",
