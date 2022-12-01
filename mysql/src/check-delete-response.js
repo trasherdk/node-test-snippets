@@ -2,6 +2,10 @@
 import { createConnection } from 'mysql2/promise'
 import dotenv from 'dotenv'
 import { insertArray } from './insert-array.js'
+import { insertArrayRecursive } from './insert-array-recursive.js'
+import { resolve } from 'path'
+import { reject } from 'async'
+
 /*
 import path, {resolve} from 'path'
 import { fileURLToPath } from 'url'
@@ -29,52 +33,57 @@ const data = [
 const cols = ['firstname', 'lastname', 'email', 'status']
 
 const main = async () => {
-  // create the connection to database
-  let connection
-  try {
-    connection = await createConnection({
-      host: DB_HOST,
-      user: DB_USER,
-      password: DB_PASS,
-      database: DB_NAME
-    })
-  } catch (error) {
-    console.error(error)
-    process.exit(1)
-  }
-
-  connection.execute('truncate table users')
-
-  insertArray(connection, 'users', cols, data, (err, response) => {
-    if (err) {
-      console.log('callback:', err)
-      console.log(`${response.length} was not inserted`)
+  return new Promise(async (resolve, reject) => {
+    // create the connection to database
+    let db
+    try {
+      db = await createConnection({
+        host: DB_HOST,
+        user: DB_USER,
+        password: DB_PASS,
+        database: DB_NAME
+      })
+    } catch (error) {
+      console.error(error)
+      reject(error)
     }
-  })
-  // simple query
-  let [results, fields] = await connection.query('SELECT * FROM users')
 
-  console.log('results', results) // results contains rows returned by server
-  console.log('fields', fields.map(f => `${f.name}`)); // fields contains extra meta data about results, if available
+    await db.execute('truncate table users')
 
-  // with placeholder
-  [results, fields] = await connection.query(
-    'SELECT firstname, lastname FROM `users` WHERE `firstname` = ? AND `status` = ?',
-    ['Page', 4],
-    (err) => {
+    // insertArrayRecursive(db, 'users', cols, data, (err, response) => {
+    insertArrayRecursive(db, 'users', data, (err, response) => {
       if (err) {
-        const error = {
-          code: err.code,
-          message: err.sqlMessage,
-          sql: err.sql
-        }
-        console.error(error)
-        return error
+        console.log('callback:', err)
+        reject(`${response.length} was not inserted`)
       }
-    }
-  )
+    })
+    // simple query
+    let [results, fields] = await db.query('SELECT * FROM users')
 
-  console.log('more results', results)
+    console.log('results', results) // results contains rows returned by server
+    console.log('fields', fields.map(f => `${f.name}`)); // fields contains extra meta data about results, if available
+
+    // with placeholder
+    [results, fields] = await db.query(
+      'SELECT firstname, lastname FROM `users` WHERE `firstname` = ? AND `status` = ?',
+      ['Jane', 4],
+      (err) => {
+        if (err) {
+          const error = {
+            code: err.code,
+            message: err.sqlMessage,
+            sql: err.sql
+          }
+          console.error(error)
+          reject(error)
+        }
+      }
+    )
+
+    console.log('more results', results)
+  })
 }
 
-main()
+(async () => {
+  await main()
+})()
