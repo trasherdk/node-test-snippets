@@ -25,7 +25,11 @@ const oPayload = {
   iat: tNow,
   exp: tEnd,
   aud: 'https://appleid.apple.com',
-  sub: clientId
+  sub: clientId,
+  data: {
+    alias: 'TrasherDK',
+    ip: '1.2.3.4'
+  }
 }
 
 const sHeader = JSON.stringify(oHeader)
@@ -34,17 +38,27 @@ let sResult
 try {
   const sKey = jsrsasign.KEYUTIL.getKey(Private)
   sResult = jsrsasign.KJUR.jws.JWS.sign('ES256', sHeader, sPayload, sKey)
+
+  console.log('sign:', sResult)
+
 } catch (error) {
-  console.log(error)
+  console.log('sign:', error)
   process.exit()
 }
 
-console.log(sResult)
+let vResult
+try {
+  vResult = jsrsasign.KJUR.jws.JWS.verifyJWT(sResult, Public, {
+    alg: ['ES256'],
+    verifyAt: jsrsasign.KJUR.jws.IntDate.get('now')
+  })
 
-console.log('verifyJWT:', jsrsasign.KJUR.jws.JWS.verifyJWT(sResult, Public, {
-  alg: ['ES256'],
-  verifyAt: jsrsasign.KJUR.jws.IntDate.get('now')
-}))
+  console.log('verifyJWT:', vResult)
+
+} catch (error) {
+  console.log('verifyJWT:', error)
+  process.exit()
+}
 
 let headerObj
 let payloadObj
