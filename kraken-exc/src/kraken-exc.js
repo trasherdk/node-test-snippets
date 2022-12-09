@@ -12,7 +12,7 @@ dotenv.config({ path: envpath })
 
 const { API_KEY, API_SECRET } = process.env
 
-console.log('KET: %s \nSECRET: &s', API_KEY, API_SECRET)
+console.log('KET: %s \nSECRET: %s', API_KEY, API_SECRET)
 
 const main = async () => {
   const kraken = new Kraken({
