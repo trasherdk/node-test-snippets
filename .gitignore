@@ -5,6 +5,7 @@
 *.srl
 node_modules
 .env.*
-!.env*sample
+!.env.example
+.npmrc
 temp
 dbml-error.log

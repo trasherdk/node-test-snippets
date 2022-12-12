@@ -20,7 +20,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
-    "@types/node": "^18.11.12",
+    "@types/node": "^18.11.13",
     "@types/zeromq": "^5.2.1",
     "ts-node": "^10.9.1",
     "tsm": "^2.3.0",
@@ -30,7 +30,7 @@
     "async": "^3.2.4",
     "axios": "^1.2.1",
     "base64-stream": "^1.0.0",
-    "ccxt": "^2.2.91",
+    "ccxt": "^2.2.92",
     "ccxws": "^0.47.0",
     "command-line-args": "^5.2.1",
     "dotenv": "^16.0.3",
@@ -46,6 +46,7 @@
     "piscina": "^3.2.0",
     "progress": "^2.0.3",
     "simple-node-logger": "^21.8.12",
+    "tardis-node": "^6.1.1",
     "threads": "^1.7.0",
     "zeromq": "^5.3.1"
   }
