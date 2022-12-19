@@ -22,13 +22,17 @@ const main = async () => {
   }
   )
 
-  kraken.getBalance(function (err, data) {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log(data);
-    }
-  });
+  try {
+    kraken.getBalance(function (err, data) {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(JSON.parse(data));
+      }
+    });
+  } catch (error) {
+    console.log('kraken.getBalance():', error)
+  }
 }
 
 main()
