@@ -20,7 +20,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
-    "@types/node": "^18.11.13",
+    "@types/node": "^18.11.17",
     "@types/zeromq": "^5.2.1",
     "ts-node": "^10.9.1",
     "tsm": "^2.3.0",
@@ -30,7 +30,7 @@
     "async": "^3.2.4",
     "axios": "^1.2.1",
     "base64-stream": "^1.0.0",
-    "ccxt": "^2.2.92",
+    "ccxt": "^2.4.27",
     "ccxws": "^0.47.0",
     "command-line-args": "^5.2.1",
     "dotenv": "^16.0.3",
