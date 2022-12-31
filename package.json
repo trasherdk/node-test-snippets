@@ -20,7 +20,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
-    "@types/node": "^18.11.17",
+    "@types/node": "^18.11.18",
     "@types/zeromq": "^5.2.1",
     "ts-node": "^10.9.1",
     "tsm": "^2.3.0",
@@ -28,9 +28,9 @@
   },
   "dependencies": {
     "async": "^3.2.4",
-    "axios": "^1.2.1",
+    "axios": "^1.2.2",
     "base64-stream": "^1.0.0",
-    "ccxt": "^2.4.27",
+    "ccxt": "^2.4.85",
     "ccxws": "^0.47.0",
     "command-line-args": "^5.2.1",
     "dotenv": "^16.0.3",
@@ -49,6 +49,7 @@
     "simple-node-logger": "^21.8.12",
     "tardis-node": "^6.1.1",
     "threads": "^1.7.0",
+    "uWebSockets.js": "github:uNetworking/uWebSockets.js#v20.15.0",
     "zeromq": "^5.3.1"
   }
 }
