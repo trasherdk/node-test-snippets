@@ -16,12 +16,16 @@ const port = 8443
 
 createServer(options, (req, res) => {
   console.log('request')
+  const ts = +Date.now()
+  const hr = +process.hrtime().join('')
+  console.log(ts, hr)
   res.setHeader('Content-Type', 'text/html; charset=utf-8')
   res.setHeader('Cache-Control', 'no-cache')
   res.writeHead(200)
   res.end(`
     <h3>echo on port: ${host}:${port}</h3>
-    <div>Date: ${Date.now()}</div>
+    <div>Date: ${ts} : ${ts.toString('36')}</div>
+    <div>HiRe: ${hr} : ${hr.toString('36')}</div>
   `)
 }).listen(port, host, () => {
   console.log(`listening on: ${host}:${port}`)
