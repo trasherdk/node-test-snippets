@@ -1,4 +1,5 @@
-// import fetch from 'node-fetch'
+//import fetch from 'node-fetch'
+// const { json } = require("stream/consumers");
 
 const data = {
   ZEUR: '0.0823',
@@ -6,48 +7,46 @@ const data = {
   XXBT: '0.0000000100',
   XXMR: '10.2891328200',
   USDT: '0.00000000',
-  XXRP: '0.00000000',
-};
+  XXRP: '0.00000000'
+}
 
-const log = (msg) => {
-  const doit = (callback) => {
-    callback(msg);
-  };
-  doit(console.log);
-};
-const totals = {};
-Object.keys(data).map((key) => (totals[key] = 0));
+const totals = {}
+Object.keys(data).map((key) => (totals[key] = 0))
 
-console.log('totals:', totals);
+console.log('totals:', totals)
 
 const getAssetInfo = async (asset) => {
-  console.log(`getAssetInfo("${asset}")`);
-
-  const myHeaders = new Headers();
-  myHeaders.append('Content-Type', 'application/json');
-
+  console.log(`getAssetInfo("${asset}")`)
   const opts = {
     method: 'GET',
-    headers: { 'Content-Type': 'application/json' },
-  };
+    headers: { 'Content-Type': 'application/json' }
+  }
   const url = `https://api.kraken.com/0/public/Assets?asset=${asset}`
 
-  let info;
   try {
     const response = await fetch(url, opts)
-    info = await response.json()
+    const json = await response.json()
+    return json.result[asset]
   } catch (error) {
-    console.log(`Catched (${asset}): ${error}`);
-    return {};
+    reject(new Error(`Catched (${asset}): ${error}`))
   };
-  return info.result[asset];
-};
-
-const assets = {};
-for (const key of Object.keys(data)) {
-  assets[key] = await getAssetInfo(key);
-  console.log(key, assets[key]);
 }
-console.log('End of program')
 
-// Object.keys(data).forEach((key) => getAssetInfo(key));
+const main = async () => {
+  const assets = {}
+  for await (const key of Object.keys(data)) {
+    try {
+      assets[key] = await getAssetInfo(key)
+      console.log(key, assets[key])
+    } catch (err) {
+      console.log('main() catch:', err)
+    }
+  }
+  console.log('End of main()')
+}
+
+main()
+console.log('After main()')
+
+Object.keys(data).forEach(async (key) => await getAssetInfo(key));
+console.log('End of program')
