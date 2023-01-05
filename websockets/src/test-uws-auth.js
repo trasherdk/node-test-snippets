@@ -28,16 +28,21 @@ let listenSocket
 app
   .ws('/*', {
     upgrade (res, req, context) {
+      res.onAborted(() => {
+        res.aborted = true
+      })
+
       const _cookie = cookie.parse(req.getHeader('cookie'))
       // validate the cookie somehow
       try {
         res.user = decodeJwtCookie(res, req, 'cookieName')
       }
       catch {
+        if (res.aborted) return
         return res.writeStatus('401').end()
       }
 
-      res.upgrade({ uid: res.user._id },
+      return res.upgrade({ uid: res.user._id },
         req.getHeader('sec-websocket-key'),
         req.getHeader('sec-websocket-protocol'),
         req.getHeader('sec-websocket-extensions'),
