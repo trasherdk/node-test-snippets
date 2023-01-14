@@ -3,6 +3,6 @@
   "env": {
     "NODE_ENV": "development"
   },
-  "ext": "ts",
+  "ext": "ts,js",
   "exec": "ts-node-esm"
 }
