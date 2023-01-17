@@ -41,11 +41,19 @@ const connect = async () => {
   pool.on('release', function (conn) {
     console.log('connection release', conn.threadId);
   });
+
+  pool.on('close', function (conn) {
+    console.log('connection closed', conn.threadId);
+  });
 };
 
 const getConn = async () => {
   return await pool.getConnection();
 };
+
+const close = async () => {
+  return await pool.end()
+}
 
 const foundRow = async conn => {
   const [rows, fields] = await conn.query(`SELECT FOUND_ROWS();`);
@@ -55,4 +63,4 @@ const foundRow = async conn => {
   return rows[0]['FOUND_ROWS()'];
 };
 
-export { pool, connect, foundRow, getConn };
+export { pool, connect, close, foundRow, getConn };
