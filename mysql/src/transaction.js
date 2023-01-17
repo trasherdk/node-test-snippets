@@ -1,14 +1,32 @@
 /*
-import mysql from 'mysql2/promise';
-import dotenv from 'dotenv'
-import path, { resolve } from 'path'
-import { fileURLToPath } from 'url'
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `firstname` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `lastname` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `email` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `createdAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
+CREATE DEFINER=`root`@`%` PROCEDURE `create_user_transaction`(
+  IN fname VARCHAR(45),
+  IN lname VARCHAR(45),
+  IN email VARCHAR(256),
+  OUT user_id INT
+)
+    SQL SECURITY INVOKER
+BEGIN
+  START TRANSACTION;
 
-dotenv.config(({ path: `${resolve(__dirname, '.env')}` }))
-const { DB_HOST, DB_PORT, DB_USER, DB_PASS, DB_NAME } = process.env
+  SELECT create_user_function( fname, lname, email) INTO user_id;
+
+  IF user_id > 0 THEN
+    COMMIT;
+  ELSE
+    ROLLBACK;
+  END IF;
+END
 */
 import * as db from "./check-conn-id-db.js";
 
