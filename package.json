@@ -46,7 +46,7 @@
     "kraken-exc": "^1.4.5",
     "mysql2": "^2.3.3",
     "node-fetch": "^3.3.0",
-    "node-jose": "^2.1.1",
+    "node-jose": "^2.2.0",
     "node-jsencrypt": "^1.0.0",
     "ohlc-resample": "^1.2.1",
     "piscina": "^3.2.0",
