@@ -8,7 +8,7 @@ const __dirname = path.dirname(__filename)
 
 // config()
 
-const ENV_PATH = resolve(__dirname, `../../.env.${process.env.MONERO_NET || 'stagenet'}`)
+const ENV_PATH = resolve(__dirname, `../../.env.${process.env.MONERO_NET || 'mainnet'}`)
 console.info('Loading network specific config from %s', ENV_PATH)
 
 dotenv.config({ path: ENV_PATH })
@@ -77,9 +77,12 @@ subscriber.on('close_error', (event) => {
 console.log('Subscriber connecting to %s:%s on %s', MONERO_HOST, MONERO_ZMQ_SUB_PORT, MONERO_NET)
 
 subscriber.on('message', (message) => {
-  let messageClean = Buffer.from(message).toString()
-  messageClean = messageClean.slice(messageClean.indexOf(':') + 1)
-  console.log(messageClean)
+  const messageStr = Buffer.from(message).toString()
+  const messages = JSON.parse(messageStr.slice(messageStr.indexOf(':') + 1))
+  messages.map((message) => {
+    message.fee = Number(message.fee) * 1e-12
+    console.log(message)
+  })
   // console.log(message2.json-minimal-txpool_add);
 })
 
