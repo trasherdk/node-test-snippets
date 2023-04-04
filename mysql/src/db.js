@@ -2,16 +2,13 @@ import * as mysql from 'mysql2/promise';
 
 let connection = null
 
-export const DB = {
+const DB = {
 
   async connect (options) {
     if (!connection) {
-      connection = await DB.getConnection(options)
+      connection = await getConnection(options)
+        .then(conn => conn)
     }
-  },
-
-  async getConnection (options) {
-    return await mysql.createConnection(options)
   },
 
   async query (sql, values) {
@@ -28,3 +25,9 @@ export const DB = {
     await connection.close()
   }
 }
+
+const getConnection = async (options) => {
+  return await mysql.createConnection(options)
+}
+
+export default DB
