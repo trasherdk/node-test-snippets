@@ -2,6 +2,9 @@ import * as zmq from 'zeromq'
 import dotenv from 'dotenv'
 import path, { resolve } from 'path'
 import { fileURLToPath } from 'url'
+import BigNumber from 'bignumber.js';
+
+const oneXMR = new BigNumber('1000000000000')
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -80,7 +83,8 @@ subscriber.on('message', (message) => {
   const messageStr = Buffer.from(message).toString()
   const messages = JSON.parse(messageStr.slice(messageStr.indexOf(':') + 1))
   messages.map((message) => {
-    message.fee = Number(message.fee) * 1e-12
+    const fee = new BigNumber(message.fee)
+    message.fee = parseFloat(fee.dividedBy(oneXMR))
     console.log(message)
   })
   // console.log(message2.json-minimal-txpool_add);
