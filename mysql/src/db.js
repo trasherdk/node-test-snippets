@@ -30,4 +30,10 @@ const getConnection = async (options) => {
   return await mysql.createConnection(options)
 }
 
+const errorReturn = (error) => {
+  return {
+    ok: false,
+    code: error.message
+  }
+}
 export default DB

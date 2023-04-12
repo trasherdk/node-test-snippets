@@ -28,7 +28,7 @@ async function main () {
   * Anything after await new Promise() never executes.
    */
   version = await version
-  console.log('awaited version:', version[0])
+  console.log('awaited version:', version[0][0])
 
   const version2 = await pool.execute('SELECT version()')
   console.log('awaited execute():', version2[0])
