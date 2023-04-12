@@ -34,6 +34,7 @@ const getAssetInfo = async (asset) => {
 
 const main = async () => {
   const assets = {}
+  console.log('Start main()')
   for await (const key of Object.keys(data)) {
     try {
       assets[key] = await getAssetInfo(key)
@@ -45,8 +46,9 @@ const main = async () => {
   console.log('End of main()')
 }
 
-main()
+await main()
 console.log('After main()')
-
+/*
 Object.keys(data).forEach(async (key) => await getAssetInfo(key));
+*/
 console.log('End of program')
