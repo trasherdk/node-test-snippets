@@ -6,7 +6,7 @@ const connect = async (poolOptions) => {
   // Create the connection pool. The pool-specific settings are the defaults
 
   if (!pool) {
-    pool = await mysql.createPool(poolOptions);
+    pool = mysql.createPool(poolOptions);
   }
 
   pool.on('connection', function (err) {
