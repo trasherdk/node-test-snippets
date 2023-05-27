@@ -20,19 +20,19 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
-    "@types/node": "^18.15.11",
+    "@types/node": "^20.2.5",
     "@types/ws": "^8.5.4",
     "@types/zeromq": "^5.2.2",
     "ts-node": "^10.9.1",
     "tsm": "^2.3.0",
-    "typescript": "^5.0.2"
+    "typescript": "^5.0.4"
   },
   "dependencies": {
     "async": "^3.2.4",
-    "axios": "^1.3.4",
+    "axios": "^1.4.0",
     "base64-stream": "^1.0.0",
     "bignumber.js": "^9.1.1",
-    "ccxt": "^3.0.43",
+    "ccxt": "^3.1.10",
     "ccxws": "^0.47.0",
     "command-line-args": "^5.2.1",
     "cookie": "^0.5.0",
@@ -41,12 +41,12 @@
     "express": "^4.18.2",
     "express-session": "^1.17.3",
     "imap": "^0.8.19",
-    "jose": "^4.13.1",
+    "jose": "^4.14.4",
     "jsonwebtoken": "^9.0.0",
-    "jsrsasign": "^10.7.0",
+    "jsrsasign": "^10.8.6",
     "jsrsasign-util": "^1.0.5",
-    "kraken-exc": "^1.4.5",
-    "mysql2": "^3.2.0",
+    "kraken-exc": "^1.4.6",
+    "mysql2": "^3.3.2",
     "node-fetch": "^3.3.1",
     "node-jose": "^2.2.0",
     "node-jsencrypt": "^1.0.0",
@@ -57,7 +57,7 @@
     "tardis-node": "^6.1.1",
     "threads": "^1.7.0",
     "uuid": "^9.0.0",
-    "uWebSockets.js": "github:uNetworking/uWebSockets.js#v20.20.0",
+    "uWebSockets.js": "github:uNetworking/uWebSockets.js#v20.25.0",
     "ws": "^8.13.0",
     "zeromq": "^5.3.1"
   }
