@@ -4,12 +4,14 @@ import util from 'util'
 
 dotenv.config()
 
+const { IMAP_USER, IMAP_PASS, IMAP_HOST, IMAP_PORT, IMAP_TLS } = process.env
+
 const imap = new Imap({
-  user: process.env.IMAP_USER,
-  password: process.env.IMAP_PASS,
-  host: process.env.IMAP_HOST,
-  port: process.env.IMAP_PORT,
-  tls: (process.env.IMAP_TLS === "true")
+  user: IMAP_USER,
+  password: IMAP_PASS,
+  host: IMAP_HOST,
+  port: IMAP_PORT,
+  tls: (IMAP_TLS === "true")
 });
 
 function openInbox (cb) {
