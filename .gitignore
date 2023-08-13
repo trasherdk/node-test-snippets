@@ -4,7 +4,7 @@
 *.csr
 *.srl
 node_modules
-.env.*
+.env*
 !.env.example
 .npmrc
 temp
