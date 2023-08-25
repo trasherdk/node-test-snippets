@@ -1,8 +1,14 @@
 import * as db from "./check-conn-id-db.js";
-import dotenv from 'dotenv'
 
-dotenv.config()
-const { DB_HOST, DB_PORT, DB_USER, DB_PASS, DB_NAME } = process.env
+import dotenv from 'dotenv'
+import path, { resolve } from 'path'
+import { fileURLToPath } from 'url'
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
+
+dotenv.config({ path: resolve(__dirname, '.env') })
+const { DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASS } = process.env
+
 const poolOptions = {
   host: DB_HOST,
   port: DB_PORT,
