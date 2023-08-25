@@ -1,3 +1,5 @@
+# Stuff I can't remember, and has to google again and again
+
 ### Initialize MySQL database directory after initial install
 
 Setting up a basic server, with no password on `root`@`localhost` account.
