@@ -51,7 +51,6 @@
     "mysql2": "^3.6.0",
     "node-fetch": "^3.3.2",
     "node-jose": "^2.2.0",
-    "node-jsencrypt": "^1.0.0",
     "ohlc-resample": "^1.2.1",
     "piscina": "^4.1.0",
     "progress": "^2.0.3",
