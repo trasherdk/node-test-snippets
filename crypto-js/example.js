@@ -1,13 +1,14 @@
-const CryptoJS = require('crypto-js')
-const crypto = require('crypto')
+import cryptojs from 'crypto-js'
+const { lib, AES, enc, mode: _mode } = cryptojs
+import { randomBytes, createCipheriv, createDecipheriv } from 'crypto'
 const CRYPTO_IV_LENGTH = 16
 const encryptionKey = "bf9917c19e0cb07477d9bc27b13c1470"
 const message_to_encrypt = 'This is a secret message'
 
 
 const encryptMessage_node_crypto = (message) => {
-  const iv = crypto.randomBytes(CRYPTO_IV_LENGTH)
-  const cipher = crypto.createCipheriv('aes-256-cbc', encryptionKey, iv)
+  const iv = randomBytes(CRYPTO_IV_LENGTH)
+  const cipher = createCipheriv('aes-256-cbc', encryptionKey, iv)
   let encrypted = cipher.update(message, 'utf8', 'base64')
   encrypted += cipher.final('base64')
   return `${iv.toString('hex')}:${encrypted}`
@@ -16,7 +17,7 @@ const encryptMessage_node_crypto = (message) => {
 const decryptMessage_node_crypto = (encrypted) => {
   const [ivHex, cipher] = encrypted.split(':')
   const iv = Buffer.from(ivHex, 'hex')
-  const decipher = crypto.createDecipheriv('aes-256-cbc', encryptionKey, iv)
+  const decipher = createDecipheriv('aes-256-cbc', encryptionKey, iv)
   const decrypted = decipher.update(cipher, 'base64', 'utf8')
 
   return decrypted + decipher.final('utf8')
@@ -24,20 +25,20 @@ const decryptMessage_node_crypto = (encrypted) => {
 
 
 const encryptMessage_cryptojs = (message) => {
-  const iv = CryptoJS.lib.WordArray.random(CRYPTO_IV_LENGTH);
-  const encrypted = CryptoJS.AES.encrypt(message, CryptoJS.enc.Utf8.parse(encryptionKey), {
-    keySize: 256, iv, mode: CryptoJS.mode.CBC
+  const iv = lib.WordArray.random(CRYPTO_IV_LENGTH);
+  const encrypted = AES.encrypt(message, enc.Utf8.parse(encryptionKey), {
+    keySize: 256, iv, mode: _mode.CBC
   })
-  const cipherString = CryptoJS.enc.Base64.stringify(encrypted.ciphertext);
-  return `${iv.toString(CryptoJS.enc.Hex)}:${cipherString}`;
+  const cipherString = enc.Base64.stringify(encrypted.ciphertext);
+  return `${iv.toString(enc.Hex)}:${cipherString}`;
 }
 
 const decryptMessage_cryptojs = (encrypted) => {
   const [ivHex, cipher] = encrypted.split(':')
-  const decrypted = CryptoJS.AES.decrypt(cipher, CryptoJS.enc.Utf8.parse(encryptionKey), {
-    keySize: 256, iv: CryptoJS.enc.Hex.parse(ivHex), mode: CryptoJS.mode.CBC
+  const decrypted = AES.decrypt(cipher, enc.Utf8.parse(encryptionKey), {
+    keySize: 256, iv: enc.Hex.parse(ivHex), mode: _mode.CBC
   })
-  return decrypted.toString(CryptoJS.enc.Utf8)
+  return decrypted.toString(enc.Utf8)
 }
 
 const encrypted_node_crypto = encryptMessage_node_crypto(message_to_encrypt)
