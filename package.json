@@ -20,9 +20,9 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
-    "@types/node": "^20.8.6",
-    "@types/ws": "^8.5.7",
-    "@types/zeromq": "^5.2.3",
+    "@types/node": "^20.8.7",
+    "@types/ws": "^8.5.8",
+    "@types/zeromq": "^5.2.4",
     "ts-node": "^10.9.1",
     "tsm": "^2.3.0",
     "typescript": "^5.2.2"
@@ -34,7 +34,7 @@
     "axios": "^1.5.1",
     "base64-stream": "^1.0.0",
     "bignumber.js": "^9.1.2",
-    "ccxt": "^4.1.13",
+    "ccxt": "^4.1.20",
     "ccxws": "^0.47.0",
     "command-line-args": "^5.2.1",
     "cookie": "^0.5.0",
