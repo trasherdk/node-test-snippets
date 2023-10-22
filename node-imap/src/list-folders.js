@@ -1,6 +1,6 @@
 import dotenv from 'dotenv'
 import Imap from 'imap'
-import util from 'util'
+import { inspect } from 'util'
 
 dotenv.config()
 
@@ -39,12 +39,12 @@ imap.once('ready', function () {
     console.log('Done fetching all mail boxes!');
     imap.end();
 
-    console.log('Folders:', util.inspect(top, true, 8, true))
+    console.log('Folders:', inspect(top, true, 8, true))
     /*
     ** top.Banking.children.Kasikorn.children["Kasikorn K-Plus"].children["K-Plus Transfer"].children["Jim (The Village)"]
     */
     // console.log('List:', top.Banking.children.Kasikorn.children["Kasikorn K-Plus"].children["K-Plus Transfer"].children["Jim (The Village)"])
-    console.log('Banking Folders:', util.inspect(top.Banking, true, null, true))
+    console.log('Banking Folders:', inspect(top.Banking, true, null, true))
   })
 })
 
