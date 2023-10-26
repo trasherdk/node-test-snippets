@@ -30,7 +30,7 @@ imap.once('ready', function () {
     });
   })
   */
-  imap.getBoxes('Banking/Kasikorn/Kasikorn\ K-Plus/K-Plus\ Transfer', (err, top) => {
+  imap.getBoxes(/*'Banking/Kasikorn/Kasikorn\ K-Plus/K-Plus\ Transfer'*/'', (err, top) => {
     if (err) {
       console.error('Error:', err)
       imap.end()
@@ -44,7 +44,10 @@ imap.once('ready', function () {
     ** top.Banking.children.Kasikorn.children["Kasikorn K-Plus"].children["K-Plus Transfer"].children["Jim (The Village)"]
     */
     // console.log('List:', top.Banking.children.Kasikorn.children["Kasikorn K-Plus"].children["K-Plus Transfer"].children["Jim (The Village)"])
-    console.log('Banking Folders:', inspect(top.Banking, true, null, true))
+    if (top !== undefined) {
+      console.log('Banking Folders:', inspect(top.Banking, true, null, true))
+    }
+
   })
 })
 
