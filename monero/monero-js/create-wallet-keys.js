@@ -1,4 +1,4 @@
-import monerojs from "monero-javascript";
+import * as monerojs from "monero-javascript";
 
 main();
 async function main () {
