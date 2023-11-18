@@ -21,6 +21,7 @@ function openBox (prefix, cb) {
 let boxes = []
 
 imap.once('ready', function () {
+  console.log('Connection ready...');
   /*
   openBox('INBOX', function (err, box) {
     if (err) throw err;
@@ -44,7 +45,7 @@ imap.once('ready', function () {
     ** top.Banking.children.Kasikorn.children["Kasikorn K-Plus"].children["K-Plus Transfer"].children["Jim (The Village)"]
     */
     // console.log('List:', top.Banking.children.Kasikorn.children["Kasikorn K-Plus"].children["K-Plus Transfer"].children["Jim (The Village)"])
-    if (top !== undefined) {
+    if (top.Banking !== undefined) {
       console.log('Banking Folders:', inspect(top.Banking, true, null, true))
     }
 
@@ -53,11 +54,12 @@ imap.once('ready', function () {
 
 
 imap.once('error', function (err) {
-  console.log(err);
+  console.log('imap:error', err);
 });
 
 imap.once('end', function () {
   console.log('Connection ended');
 });
 
+console.log('imap.connect...');
 imap.connect();
