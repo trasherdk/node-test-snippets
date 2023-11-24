@@ -1,5 +1,4 @@
-import { error } from 'console';
-import DB from './db-pool.ts'
+import DB from './db-pool.js'
 
 import dotenv from 'dotenv'
 import path, { resolve } from 'path'
