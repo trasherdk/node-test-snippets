@@ -45,6 +45,9 @@ imap.once('ready', function () {
     ** top.Banking.children.Kasikorn.children["Kasikorn K-Plus"].children["K-Plus Transfer"].children["Jim (The Village)"]
     */
     // console.log('List:', top.Banking.children.Kasikorn.children["Kasikorn K-Plus"].children["K-Plus Transfer"].children["Jim (The Village)"])
+    if (top.INBOX !== undefined) {
+      console.log('INBOX Folders:', inspect(top.INBOX, true, null, true))
+    }
     if (top.Banking !== undefined) {
       console.log('Banking Folders:', inspect(top.Banking, true, null, true))
     }
