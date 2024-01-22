@@ -60,6 +60,7 @@
     "simple-node-logger": "^21.8.12",
     "tardis-dev": "^13.27.2",
     "threads": "^1.7.0",
+    "undici": "^6.3.0",
     "uuid": "^9.0.1",
     "uWebSockets.js": "github:uNetworking/uWebSockets.js#v20.39.0",
     "whoiser": "^1.17.1",
