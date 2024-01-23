@@ -4,8 +4,8 @@ import { log } from "console";
 
 const key = generateKey('secret', 24)
 
-const payload: Record<string, number | string> = {
-	squence: 1,
+const payload: Record<string, number | bigint | string> = {
+	squence: process.hrtime.bigint().toString(10),
 	message: 'My secret message.'
 }
 
