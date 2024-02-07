@@ -1,4 +1,4 @@
-import { generateKey, encrypt, decrypt } from "./encrypt-decrypt.ts";
+import { generateKey, encrypt, decrypt } from "./aes-192-cbc.ts";
 import { log } from "console";
 
 
