@@ -6,20 +6,19 @@ import dotenv from "dotenv";
 dotenv.config()
 const {
   MONERO_HOST,
-  MONERO_PORT_RPC
+  MONERO_PORT_RPC_R
 } = process.env
 
 // connect to daemon
-let daemon = await moneroTs.connectToDaemonRpc(`http://${MONERO_HOST}:${MONERO_PORT_RPC}`);
+let daemon = await moneroTs.connectToDaemonRpc(`http://${MONERO_HOST}:${MONERO_PORT_RPC_R}`);
 console.log('Connected:', await daemon.isConnected())
 
 let height = await daemon.getHeight();        // 1523651
-let txsInPool = await daemon.getTxPool();     // get transactions in the pool
-
-
 console.log('Chain height: %s', height)
+/*
+let txsInPool = await daemon.getTxPool();     // get transactions in the pool
 console.log('Chain mempool: ', txsInPool)
-
+*/
 process.exit()
 
 // create wallet from mnemonic phrase using WebAssembly bindings to monero-project
