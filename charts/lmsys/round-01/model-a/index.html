@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>OHLC Chart with techan.js</title>
+		<script src="https://d3js.org/d3.v5.min.js"></script>
+		<script src="https://techanjs.org/techan.min.js"></script> <!-- Make sure to include the correct path to techan.js -->
+		<script src="ohlc-class-a.js"></script> <!-- Replace with the path to your JavaScript file -->
+		<style>
+			.chart {
+				display: block;
+				width: fit-content;
+				height: fit-content;
+				border: 1px dotted #554f4f;
+			}
+
+			.container {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				align-content: center;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="container">
+			<h2>charts/lmsys/round-01/model-a/index.html</h2>
+			<div id="chart" class="chart"></div>
+		</div>
+
+		<script>
+			document.addEventListener("DOMContentLoaded", () => {
+				fetchData()
+					.then(ohclData => {
+						const chart = new OHLCChart("#chart", ohclData);
+					});
+
+			})
+		</script>
+	</body>
+
+</html>
