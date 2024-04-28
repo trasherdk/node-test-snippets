@@ -48,7 +48,7 @@ const aggregateOrderBook = function (orderbook, precision = undefined) {
     // or level 3
     // const orderbook = await exchange.fetchOrderBook('BTC/USD', undefined, { 'level': 3 })
 
-    const step = 0.5 // 0.01, 0.1, 0.5, 1.0, 2.5, 5.0, 10.0
+    const step = 0.01 // 0.01, 0.1, 0.5, 1.0, 2.5, 5.0, 10.0
     console.log(aggregateOrderBook(orderbook, step))
 
   })();
